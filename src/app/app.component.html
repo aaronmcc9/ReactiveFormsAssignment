@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="name">Project</label>
+          <input type="text"
+           class="form-control"
+           formControlName="name">
+           <p *ngIf="!projectForm.get('name').valid && projectForm.get('name').touched">
+            <span class="help-block" *ngIf="projectForm.get('name').errors['required']">This field is required</span>
+            <span class="help-block" *ngIf="projectForm.get('name').errors['takenName']">This name is taken</span>
+          </p>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text"
+           class="form-control"
+           formControlName="email">
+           <p *ngIf="!projectForm.get('email').valid && projectForm.get('email').touched">
+             <span class="help-block" *ngIf="projectForm.get('email').errors['required']">This field is required</span>
+             <span class="help-block" *ngIf="projectForm.get('email').errors['email']">Please enter a valid email</span>
+           </p>
+        </div>
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select type="text" formControlName="status" class="form-control">
+            <option *ngFor="let status of projectStatuses">{{status}}</option>
+          </select>
+        </div>
+        <button class="btn btn-primary form-control" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+  <div *ngIf="submitted" class="row">
+    <div class="col-xs-12">
+      <h3>Project Data</h3>
+      <p>Name: {{project.name}}</p>
+      <p>Email: {{project.email}}</p>
+      <p>Status: {{project.status}}</p>
+    </div>
+  </div>
+</div>
